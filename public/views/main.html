@@ -40,7 +40,8 @@
 			<span>ID:{{bed.id}}ABC</span>
 	<br>
 	<br>
-	    		<img src="/images/bed.png" class="img img-responsive">
+	    		<img src="/images/bed.png" class="img img-responsive" ng-if="bed.skinTemperature && bed.heartRate">
+	    		<img src="/images/line.png" class="img img-responsive" ng-if="!bed.skinTemperature || !bed.heartRate">
 	<br>
 	<br>
 				<p>
