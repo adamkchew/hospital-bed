@@ -1,0 +1,32 @@
+[
+  {
+    "label": "A",
+    "skinTemperature": 80,
+    "heartRate": 100,
+    "bedLevel": 0.8
+  },
+  {
+    "label": "B",
+    "skinTemperature": 80,
+    "heartRate": 100,
+    "bedLevel": 0.77
+  },
+  {
+    "label": "E",
+    "skinTemperature": 80,
+    "heartRate": 100,
+    "bedLevel": 0.62
+  },
+  {
+    "label": "G",
+    "skinTemperature": 80,
+    "heartRate": 100,
+    "bedLevel": 0.70
+  },
+  {
+    "label": "H",
+    "skinTemperature": 90,
+    "heartRate": 92,
+    "bedLevel": 0.9
+  }
+]

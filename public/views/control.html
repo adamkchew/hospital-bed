@@ -1,23 +1,28 @@
-<div class="container">
+<div class="container" ng-controller="ControlController">
 
   <!-- Existing beds -->
   <div class="row">
 
-    <div class="col-xs-12">
-      existing 1
+    <div class="col-xs-12" ng-repeat="bed in beds">
+      {{bed.id}} {{bed.skinTemperature}} {{bed.heartRate}}
     </div>
 
   </div>
+
+  <br>
+  <br>
+  <br>
+  <hr>
+  <br>
 
 
   <!-- New beds -->
   <div class="row">
-    <div class="col-xs-">
-      <button>Add new bed</button>
+    <div class="col-xs-12">
+      <button class="btn btn-block" ng-click="addBed()">Add new bed</button>
     </div>
 
   </div>
-
 
 
 </div>

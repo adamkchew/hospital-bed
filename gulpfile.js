@@ -109,7 +109,7 @@ gulp.task('images', function() {
 
 gulp.task('watch', function() {
   gulp.watch('public/stylesheets/**/*', ['css']);
-  gulp.watch('public/scripts/**/*.js', ['scripts']);
+  gulp.watch('public/javascripts/**/*.js', ['scripts']);
 });
 
 gulp.task('default', ['fonts', 'images', 'css', 'scripts', 'watch']); //development
