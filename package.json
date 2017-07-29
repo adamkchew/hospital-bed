@@ -20,6 +20,7 @@
   "homepage": "https://github.com/adamkchew/hospital-bed#readme",
   "dependencies": {
     "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
     "angularfire": "^2.3.0",
     "bootstrap": "^3.3.7",
     "express": "^4.15.3",
