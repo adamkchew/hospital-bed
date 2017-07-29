@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/adamkchew/hospital-bed/issues"
   },
-  "homepage": "https://github.com/adamkchew/hospital-bed#readme"
+  "homepage": "https://github.com/adamkchew/hospital-bed#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }
