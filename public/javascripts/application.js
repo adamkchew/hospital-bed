@@ -12,8 +12,50 @@ var moment = require('moment');
 
 var app = angular.module('website', [angularRoute, angularfire]);
 
-var skinTemperatureOptions = [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80];
-var heartRateOptions = [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101];
+var skinTemperatureOptions = [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83];
+var heartRateOptions = [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102];
+var locationOptions = [
+  {
+    latitude: 42.361824,
+    longitude: -71.085577
+  },
+  {
+    latitude: 42.363980,
+    longitude: -71.080341
+  },
+  {
+    latitude: 42.357828,
+    longitude: -71.095448
+  },
+  {
+    latitude: 42.361824,
+    longitude: -71.071501
+  },
+  {
+    latitude: 42.352310,
+    longitude: -71.085234
+  },
+  {
+    latitude: 42.361761,
+    longitude: -71.082058
+  },
+  {
+    latitude: 42.357638,
+    longitude: -71.095276
+  },
+  {
+    latitude: 42.355989,
+    longitude: -71.092014
+  },
+  {
+    latitude: 42.358399,
+    longitude: -71.072874
+  },
+  {
+    latitude: 42.366263,
+    longitude: -71.095448
+  }
+];
 
 app.controller('MainController', function($scope, $firebaseArray) {
 
@@ -31,7 +73,7 @@ app.controller('MainController', function($scope, $firebaseArray) {
   });
 });
 
-app.controller('ControlController', function($scope, $firebaseArray) {
+app.controller('ControlController', function($scope, $firebaseArray, $firebaseObject) {
 
   $scope.beds = [];
 
@@ -49,13 +91,33 @@ app.controller('ControlController', function($scope, $firebaseArray) {
   $scope.regulate = function(ref) {
     var randomSkinTemperature = skinTemperatureOptions[Math.floor(Math.random() * skinTemperatureOptions.length)];
     var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
+
+
   };
 
   $scope.addBed = function() {
-    list.$add({label: Math.random().toString(36).substring(7), skinTemperature: 0, heartRate: 0}).then(function(ref) {
+    var randomSkinTemperature = skinTemperatureOptions[Math.floor(Math.random() * skinTemperatureOptions.length)];
+    var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
+    var randomLocation = locationOptions[Math.floor(Math.random() * locationOptions.length)];
+
+    list.$add({label: Math.random().toString(36).substring(7), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude}).then(function(ref) {
       console.log('Added bed: ' + ref)
+    }).catch(function(error) {
+      console.log("Error:", error);
     });
   };
+
+  $scope.removeBed = function(id) {
+
+    console.log(firebase.database().ref() + id);
+
+    var obj = $firebaseObject(firebase.database().ref() + id);
+    obj.$remove().then(function(ref) {
+      console.log('Deleted bed: ' + ref);
+    }).catch(function(error) {
+      console.log("Error:", error);
+    });
+  }
 
 });
 

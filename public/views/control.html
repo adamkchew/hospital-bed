@@ -3,8 +3,29 @@
   <!-- Existing beds -->
   <div class="row">
 
-    <div class="col-xs-12" ng-repeat="bed in beds">
-      {{bed.id}} {{bed.skinTemperature}} {{bed.heartRate}}
+    <div class="col-xs-12">
+
+      <table class="table table-responsive table-striped table-condensed">
+        <tr>
+          <th class="col-xs-2">ID</th>
+          <th class="col-xs-2">Skin Temperature</th>
+          <th class="col-xs-2">Heart Rate</th>
+          <th class="col-xs-2">Latitude</th>
+          <th class="col-xs-2">Longitude</th>
+          <th class="col-xs-2">Delete</th>
+        </tr>
+
+        <tr ng-repeat="bed in beds">
+          <td>{{bed.$id}}</td>
+          <td>{{bed.skinTemperature}}</td>
+          <td>{{bed.heartRate}}</td>
+          <td>{{bed.latitude}}</td>
+          <td>{{bed.longitude}}</td>
+          <td>
+            <button class="btn btn-danger btn-sm btn-block" ng-click="removeBed(bed.$id)">Delete</button>
+          </td>
+        </tr>
+      </table>
     </div>
 
   </div>
