@@ -1,60 +1,64 @@
 <style type="text/css">
 
-.header {
+  .header {
     background: #161824;
     height: 150px;
-}
+  }
 
+  .bed-container {
+    background-color: #161824;
+  }
 
-.bed-container {
-	background-color: #161824;
-}
-
-.bed {
-	border: 6px #ffffff;
-	margin: 40px;
-	padding: 40px;
-}
+  .bed {
+    border: 6px #ffffff;
+    margin: 40px;
+    padding: 40px;
+  }
 
 </style>
 
 <div class="container-fluid">
-	<div class="row header">
-		<div class="col-xs-12">
-			<br>
-			<br>
+  <div class="row header">
+    <div class="col-xs-12">
+      <br>
+      <br>
 
-			<h3 class="text-center">Hospital Beds On-The-Go</h3>
-		</div>
-	</div>
+      <h3 class="text-center">Hospital Beds On-The-Go</h3>
+    </div>
+  </div>
 </div>
 
 <div class="container" ng-controller="MainController">
 
   <div class="row">
+
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="bed in beds">
 
-		<div class="bed-container">
-			<div class="bed">
+      <a href="" ng-click="showBedDetailModal(bed.$id)">
 
-			<span>ID:{{bed.id}}ABC</span>
-	<br>
-	<br>
-	    		<img src="/images/bed.png" class="img img-responsive">
-	<br>
-	<br>
-				<p>
-					<span><img src="/images/heart.png" width="30px"></span>
-					<span>{{bed.heartRate}}bpm</span>
-				</p>
+        <div class="bed-container">
+          <div class="bed">
 
-				<p>
-					<span><img src="/images/temperature.png" width="30px"></span>
-					<span>{{bed.skinTemperature}}°C</span>
-				</p>
+            <span>ID:{{bed.id}}ABC</span>
+            <br>
+            <br>
+            <img src="/images/bed.png" class="img img-responsive">
+            <br>
+            <br>
+            <p>
+              <span><img src="/images/heart.png" width="30px"></span>
+              <span>{{bed.heartRate}}bpm</span>
+            </p>
 
-			</div>
-		</div>
+            <p>
+              <span><img src="/images/temperature.png" width="30px"></span>
+              <span>{{bed.skinTemperature}}°C</span>
+            </p>
+
+          </div>
+        </div>
+
+      </a>
     </div>
   </div>
 </div>

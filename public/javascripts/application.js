@@ -4,13 +4,15 @@ global.bootstrap = require('bootstrap');
 
 //Angular dependencies
 var angular = require('angular');
+var angularUIBootstrap = require('angular-ui-bootstrap');
 var angularRoute = require('angular-route');
+
 var angularfire = require('angularfire');
 
 //Utilities
 var moment = require('moment');
 
-var app = angular.module('website', [angularRoute, angularfire]);
+var app = angular.module('website', [angularRoute, angularUIBootstrap, angularfire]);
 
 var skinTemperatureOptions = [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83];
 var heartRateOptions = [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102];
@@ -57,7 +59,11 @@ var locationOptions = [
   }
 ];
 
-app.controller('MainController', function($scope, $firebaseArray) {
+app.controller('MainController', function($scope, $firebaseArray, $uibModal) {
+
+  $scope.showBedDetailModal = function(id) {
+    var modalInstance = $uibModal.open({templateUrl: '/views/modals/bed-detail.html', controller: 'BedDetailModalController', resolve: {data: {bedId: id}}});
+  };
 
   $scope.beds = [];
 
@@ -118,6 +124,14 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
       console.log("Error:", error);
     });
   }
+
+});
+
+app.controller('BedDetailModalController', function($scope, $uibModalInstance, $firebaseArray, $firebaseObject, data) {
+
+  $scope.bedId = data.bedId;
+
+  $scope.bed;
 
 });
 
