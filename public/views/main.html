@@ -34,31 +34,29 @@
 
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="bed in beds">
 
-      <a href="" ng-click="showBedDetailModal(bed.$id)">
+      <div class="bed-container" ng-click="showBedDetailModal(bed.$id)" style="cursor: pointer;">
+        <div class="bed">
 
-        <div class="bed-container">
-          <div class="bed">
+          <span>ID:{{bed.id}}ABC</span>
+          <br>
+          <br>
+          <img src="/images/bed.png" class="img img-responsive" ng-if="bed.skinTemperature && bed.heartRate">
+          <img src="/images/line.png" class="img img-responsive" ng-if="!bed.skinTemperature || !bed.heartRate">
+          <br>
+          <br>
+          <p>
+            <span><img src="/images/heart.png" width="30px"></span>
+            <span>{{bed.heartRate}}bpm</span>
+          </p>
 
-            <span>ID:{{bed.id}}ABC</span>
-            <br>
-            <br>
-            <img src="/images/bed.png" class="img img-responsive">
-            <br>
-            <br>
-            <p>
-              <span><img src="/images/heart.png" width="30px"></span>
-              <span>{{bed.heartRate}}bpm</span>
-            </p>
+          <p>
+            <span><img src="/images/temperature.png" width="30px"></span>
+            <span>{{bed.skinTemperature}}°C</span>
+          </p>
 
-            <p>
-              <span><img src="/images/temperature.png" width="30px"></span>
-              <span>{{bed.skinTemperature}}°C</span>
-            </p>
-
-          </div>
         </div>
+      </div>
 
-      </a>
     </div>
   </div>
 </div>
