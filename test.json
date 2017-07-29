@@ -3,7 +3,9 @@
     "label": "A",
     "skinTemperature": 80,
     "heartRate": 100,
-    "bedLevel": 0.8
+    "bedLevel": 0.8,
+    "longitude": 72.000,
+    "latitude": 42.122
   },
   {
     "label": "B",

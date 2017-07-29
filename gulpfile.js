@@ -93,7 +93,9 @@ gulp.task('scripts', function() {
 
 gulp.task('minify-js', ['scripts'], function() {
   return gulp.src(source.compiledScript)
-    .pipe(uglify({mangle: false}))
+    .pipe(uglify({mangle: false}).on('error', (err => {
+      console.log(err);
+    })))
     .pipe(gulp.dest(destination.script))
 });
 
