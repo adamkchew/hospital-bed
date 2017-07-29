@@ -20,7 +20,7 @@ app.config(function($locationProvider, $routeProvider) {
 
   //Routes
   $routeProvider.when('/', {
-    templateUrl: 'views/index.html'
+    templateUrl: 'views/main.html'
   }).when('/control', {
     templateUrl: 'views/control.html'
   }).otherwise({
