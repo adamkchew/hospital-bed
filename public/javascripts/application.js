@@ -126,15 +126,41 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     });
   };
 
-  $scope.removeBed = function(id) {
+  $scope.resetBed = function(id) {
 
-    console.log(firebase.database().ref() + id);
+    var obj = $firebaseObject(firebase.database().ref(id));
 
-    var obj = $firebaseObject(firebase.database().ref() + id);
-    obj.$remove().then(function(ref) {
-      console.log('Deleted bed: ' + ref);
-    }).catch(function(error) {
-      console.log("Error:", error);
+    obj.$loaded().then(function(data) {
+
+      data.skinTemperature = null;
+      data.heartRate = null;
+      data.frames = [];
+
+      data.$save().then(function(ref) {
+        console.log('Reset bed: ' + ref);
+      }).catch(function(error) {
+        console.log("Error:", error);
+      });
+    });
+  };
+
+  $scope.reactivateBed = function(id) {
+    var randomSkinTemperature = skinTemperatureOptions[Math.floor(Math.random() * skinTemperatureOptions.length)];
+    var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
+
+    var obj = $firebaseObject(firebase.database().ref(id));
+
+    obj.$loaded().then(function(data) {
+
+      data.skinTemperature = randomSkinTemperature;
+      data.heartRate = randomHeartRate;
+      data.frames = [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}];
+
+      data.$save().then(function(ref) {
+        console.log('Reset bed: ' + ref);
+      }).catch(function(error) {
+        console.log("Error:", error);
+      });
     });
   };
 

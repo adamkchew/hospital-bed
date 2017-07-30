@@ -7,22 +7,15 @@
 
       <table class="table table-responsive table-condensed">
         <tr>
-          <th class="col-xs-2">ID</th>
-          <th class="col-xs-2">Skin Temperature</th>
-          <th class="col-xs-2">Heart Rate</th>
-          <th class="col-xs-2">Latitude</th>
-          <th class="col-xs-2">Longitude</th>
-          <th class="col-xs-2">Delete</th>
+          <th class="col-xs-2">Label</th>
+          <th class="col-xs-10">Reset</th>
         </tr>
 
         <tr ng-repeat="bed in beds">
-          <td>{{bed.$id}}</td>
-          <td>{{bed.skinTemperature}}</td>
-          <td>{{bed.heartRate}}</td>
-          <td>{{bed.latitude}}</td>
-          <td>{{bed.longitude}}</td>
+          <td>{{bed.label}}</td>
           <td>
-            <button class="btn btn-danger btn-sm btn-block" ng-click="removeBed(bed.$id)">Delete</button>
+            <button class="btn btn-danger btn-sm btn-block" ng-click="resetBed(bed.$id)" ng-show="bed.skinTemperature && bed.heartRate">Reset</button>
+            <button class="btn btn-primary btn-sm btn-block" ng-click="reactivateBed(bed.$id)" ng-show="!bed.skinTemperature || !bed.heartRate">Reactivate</button>
           </td>
         </tr>
       </table>
