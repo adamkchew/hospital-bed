@@ -1,7 +1,9 @@
 <div class="bed-detail-modal-container">
 
   <div class="modal-header">
+    <a href="#" ng-click="hide()" class="pull-right" style="font-size: 30px; text-decoration: none; color: white;">×</a>
     <h3 class="modal-title">Hospital Bed #{{bed.label}}</h3>
+    <div class="clearfix"></div>
   </div>
 
   <div class="modal-body">
@@ -16,7 +18,7 @@
             <th class="col-xs-4">Skin Temperature</th>
             <th class="col-xs-4">Heart rate</th>
           </tr>
-          <tr ng-repeat="frame in bed.frames | orderBy: '-time' | limitTo: 20">
+          <tr ng-repeat="frame in bed.frames | orderBy: '-time' | limitTo: 15">
             <td>{{frame.time | date: 'medium'}}</td>
             <td>{{frame.skinTemperature}}</td>
             <td>{{frame.heartRate}}</td>

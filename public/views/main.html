@@ -12,7 +12,7 @@
   .bed {
     border: 6px #ffffff;
     margin: 40px;
-    padding: 40px;
+    padding: 32px;
   }
 
 </style>
@@ -42,10 +42,11 @@
           </div>
           <br>
           <br>
-          <img src="/images/bed.png" class="img img-responsive" ng-if="bed.skinTemperature && bed.heartRate">
-          <img src="/images/line.png" class="img img-responsive" ng-if="!bed.skinTemperature || !bed.heartRate">
+          <img src="/images/bed.png" class="img img-responsive center-block" ng-if="bed.skinTemperature && bed.heartRate">
+          <img src="/images/line.png" class="img img-responsive center-block" ng-if="!bed.skinTemperature || !bed.heartRate">
           <br>
           <br>
+
           <p>
             <img src="/images/heart.png" width="24">
             <span style="font-size: 18px;">&nbsp;<strong>{{bed.heartRate}}</strong> bpm</span>
