@@ -119,9 +119,7 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
     var randomLocation = locationOptions[Math.floor(Math.random() * locationOptions.length)];
 
-    console.log({label: Math.floor(10000 + Math.random() * 90000), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude, frames: [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}]});
-
-    list.$add({label: Math.random().toString(36).substring(4, 7).toUpperCase(), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude, frames: [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}]}).then(function(ref) {
+    list.$add({label: Math.floor(10000 + Math.random() * 90000), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude, frames: [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}]}).then(function(ref) {
       console.log('Added bed: ' + ref)
     }).catch(function(error) {
       console.log("Error:", error);
