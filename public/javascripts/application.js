@@ -2,6 +2,7 @@
 global.jQuery = require('jquery');
 global.bootstrap = require('bootstrap');
 global.firebase = require('firebase');
+global.moment = require('moment');
 
 //Angular dependencies
 var angular = require('angular');
@@ -15,6 +16,7 @@ var moment = require('moment');
 
 var app = angular.module('website', [angularRoute, angularUIBootstrap, angularfire]);
 
+var differenceOptions = [1, 2, 3];
 var skinTemperatureOptions = [67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83];
 var heartRateOptions = [88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102];
 var locationOptions = [
@@ -77,7 +79,7 @@ app.controller('MainController', function($scope, $firebaseArray, $uibModal) {
   });
 });
 
-app.controller('ControlController', function($scope, $firebaseArray, $firebaseObject) {
+app.controller('ControlController', function($scope, $firebaseArray, $firebaseObject, $interval) {
 
   $scope.beds = [];
 
@@ -89,11 +91,27 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     console.log("Error:", error);
   });
 
-  $scope.regulate = function(ref) {
-    var randomSkinTemperature = skinTemperatureOptions[Math.floor(Math.random() * skinTemperatureOptions.length)];
-    var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
+  $scope.regulate = function() {
+    var randomDifference = differenceOptions[Math.floor(Math.random() * differenceOptions.length)];
 
+    list.forEach(function(obj, index) {
 
+      if(obj.skinTemperature && obj.heartRate) {
+
+        var frameSkinTemperature = obj.skinTemperature > 100 ? obj.skinTemperature - randomDifference : obj.skinTemperature + randomDifference;
+        var frameHeartRate = obj.heartRate > 100 ? obj.heartRate - randomDifference : obj.heartRate + randomDifference;
+
+        obj.skinTemperature = frameSkinTemperature;
+        obj.heartRate = frameHeartRate;
+        obj.frames.push({time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: frameSkinTemperature, heartRate: frameHeartRate});
+
+        list.$save(index).then(function(ref) {
+          console.log('Saved bed : ' + ref);
+        }).catch(function(err) {
+          console.log("Error:", err);
+        })
+      }
+    })
   };
 
   $scope.addBed = function() {
@@ -101,7 +119,9 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
     var randomLocation = locationOptions[Math.floor(Math.random() * locationOptions.length)];
 
-    list.$add({label: Math.random().toString(36).substring(7).toUpperCase(), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude}).then(function(ref) {
+    console.log({label: Math.random().toString(36).substring(4, 7).toUpperCase(), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude, frames: [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}]});
+
+    list.$add({label: Math.random().toString(36).substring(4, 7).toUpperCase(), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude, frames: [{time: firebase.database.ServerValue.TIMESTAMP, skinTemperature: randomSkinTemperature, heartRate: randomHeartRate}]}).then(function(ref) {
       console.log('Added bed: ' + ref)
     }).catch(function(error) {
       console.log("Error:", error);
@@ -118,22 +138,21 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     }).catch(function(error) {
       console.log("Error:", error);
     });
-  }
+  };
+
+  $interval(function() {
+    $scope.regulate();
+  }, 2000);
 
 });
 
 app.controller('BedDetailModalController', function($scope, $uibModalInstance, $firebaseObject, data) {
 
-
   $scope.bedId = data.bedId;
 
   $scope.bed;
 
-  var ref = firebase.database().ref($scope.bedId);
-
-  console.log(ref);
-
-  var obj = $firebaseObject(ref);
+  var obj = $firebaseObject(firebase.database().ref($scope.bedId));
 
   obj.$loaded().then(function(data) {
     $scope.bed = data;

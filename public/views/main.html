@@ -37,7 +37,9 @@
       <div class="bed-container" ng-click="showBedDetailModal(bed.$id)" style="cursor: pointer;">
         <div class="bed">
 
-          <span>ID:{{bed.id}}ABC</span>
+          <div class="text-center">
+            <span style="font-size: 24px">ID: <strong>{{bed.label}}</strong></span>
+          </div>
           <br>
           <br>
           <img src="/images/bed.png" class="img img-responsive" ng-if="bed.skinTemperature && bed.heartRate">
@@ -45,13 +47,13 @@
           <br>
           <br>
           <p>
-            <span><img src="/images/heart.png" width="30px"></span>
-            <span>{{bed.heartRate}}bpm</span>
+            <img src="/images/heart.png" width="24">
+            <span style="font-size: 18px;">&nbsp;<strong>{{bed.heartRate}}</strong> bpm</span>
           </p>
 
           <p>
-            <span><img src="/images/temperature.png" width="30px"></span>
-            <span>{{bed.skinTemperature}}°C</span>
+            <img src="/images/temperature.png" width="24">
+            <span style="font-size: 18px;">&nbsp;<strong>{{bed.skinTemperature}}</strong> °C</span>
           </p>
 
         </div>

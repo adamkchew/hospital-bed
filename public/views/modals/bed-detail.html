@@ -16,8 +16,8 @@
             <th class="col-xs-4">Skin Temperature</th>
             <th class="col-xs-4">Heart rate</th>
           </tr>
-          <tr ng-repeat="frame in bed.frames">
-            <td>{{frame.time}}</td>
+          <tr ng-repeat="frame in bed.frames | orderBy: '-time' | limitTo: 20">
+            <td>{{frame.time | date: 'medium'}}</td>
             <td>{{frame.skinTemperature}}</td>
             <td>{{frame.heartRate}}</td>
           </tr>
