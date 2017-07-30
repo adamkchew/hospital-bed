@@ -1,6 +1,7 @@
 //Global elements the needs to be loaded once
 global.jQuery = require('jquery');
 global.bootstrap = require('bootstrap');
+global.firebase = require('firebase');
 
 //Angular dependencies
 var angular = require('angular');
@@ -69,11 +70,8 @@ app.controller('MainController', function($scope, $firebaseArray, $uibModal) {
 
   var list = $firebaseArray(firebase.database().ref());
 
-  list.$loaded().then(function(beds) {
-    $scope.beds = beds;
-
-    console.log($scope.beds);
-
+  list.$loaded().then(function(data) {
+    $scope.beds = data;
   }).catch(function(error) {
     console.log("Error:", error);
   });
@@ -85,11 +83,8 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
 
   var list = $firebaseArray(firebase.database().ref());
 
-  list.$loaded().then(function(beds) {
-    $scope.beds = beds;
-
-    console.log($scope.beds);
-
+  list.$loaded().then(function(data) {
+    $scope.beds = data;
   }).catch(function(error) {
     console.log("Error:", error);
   });
@@ -106,7 +101,7 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
     var randomHeartRate = heartRateOptions[Math.floor(Math.random() * heartRateOptions.length)];
     var randomLocation = locationOptions[Math.floor(Math.random() * locationOptions.length)];
 
-    list.$add({label: Math.random().toString(36).substring(7), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude}).then(function(ref) {
+    list.$add({label: Math.random().toString(36).substring(7).toUpperCase(), skinTemperature: randomSkinTemperature, heartRate: randomHeartRate, latitude: randomLocation.latitude, longitude: randomLocation.longitude}).then(function(ref) {
       console.log('Added bed: ' + ref)
     }).catch(function(error) {
       console.log("Error:", error);
@@ -127,11 +122,25 @@ app.controller('ControlController', function($scope, $firebaseArray, $firebaseOb
 
 });
 
-app.controller('BedDetailModalController', function($scope, $uibModalInstance, $firebaseArray, $firebaseObject, data) {
+app.controller('BedDetailModalController', function($scope, $uibModalInstance, $firebaseObject, data) {
+
 
   $scope.bedId = data.bedId;
 
   $scope.bed;
+
+  var ref = firebase.database().ref($scope.bedId);
+
+  console.log(ref);
+
+  var obj = $firebaseObject(ref);
+
+  obj.$loaded().then(function(data) {
+    $scope.bed = data;
+  }).catch(function(error) {
+    console.error("Error:", error);
+  });
+
 
 });
 
@@ -149,5 +158,17 @@ app.config(function($locationProvider, $routeProvider) {
   }).otherwise({
     templateUrl: 'views/404.html'
   });
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBxSYGKndZ8MqZ-weVhxHDwpKu_PBEz2bI",
+    authDomain: "hospital-bed.firebaseapp.com",
+    databaseURL: "https://hospital-bed.firebaseio.com",
+    projectId: "hospital-bed",
+    storageBucket: "",
+    messagingSenderId: "846524542991"
+  };
+  firebase.initializeApp(config);
+
 
 });
