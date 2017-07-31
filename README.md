@@ -15,9 +15,9 @@ These liners will have an embedded battery for broadcasting GPS, heart rate, ski
 
 This lining and mesh network application can be applied to other purposes such as, medical hospitals, advance mountaineering, natural disasters, and war zones.
 
-####Presentation
+##### Presentation
 
 [Hospital Bed On-The-Go (PDF)](../master/documentation/Hospital-Bed-On-The-Go.pdf)
 
-####Demo website
+##### Demo website
 [hospital-bed.herokuapp.com](http://hospital-bed.herokuapp.com)
