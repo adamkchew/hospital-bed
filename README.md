@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/adamkchew/hospital-bed/master/documentation/screenshot.png)
+![alt text](https://raw.githubusercontent.com/adamkchew/hospital-bed/master/documentation/banner.png)
 
 # Hospital Bed On-The-Go
 
@@ -24,3 +24,6 @@ This lining and mesh network application can be applied to other purposes such a
 
 ##### Hackathon
 [MD5 Cambridge S17 Smart Fabric](https://cambridgehack.md5.net/idea/7dHnRjGY2oviGPK3A)
+
+##### Photos
+[Directory of photos](../master/documentation)
