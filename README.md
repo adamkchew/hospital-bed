@@ -20,4 +20,7 @@ This lining and mesh network application can be applied to other purposes such a
 [Hospital Bed On-The-Go (PDF)](../master/documentation/Hospital-Bed-On-The-Go.pdf)
 
 ##### Demo website
-[hospital-bed.herokuapp.com](http://hospital-bed.herokuapp.com)
+[http://hospital-bed.herokuapp.com](http://hospital-bed.herokuapp.com)
+
+##### Hackathon
+[MD5 Cambridge S17 Smart Fabric](https://cambridgehack.md5.net/idea/7dHnRjGY2oviGPK3A)
